@@ -10,18 +10,13 @@ load_dotenv()
 class Config:
     """تنظیمات پروژه"""
     
-    # Binance
-    BINANCE_API_KEY = os.getenv('BINANCE_API_KEY')
-    BINANCE_API_SECRET = os.getenv('BINANCE_API_SECRET')
-    
-    # Kucoin
-    KUCOIN_API_KEY = os.getenv('KUCOIN_API_KEY')
-    KUCOIN_API_SECRET = os.getenv('KUCOIN_API_SECRET')
-    KUCOIN_PASSPHRASE = os.getenv('KUCOIN_PASSPHRASE')
+    # Coinex API
+    COINEX_API_KEY = os.getenv('COINEX_API_KEY')
+    COINEX_API_SECRET = os.getenv('COINEX_API_SECRET')
     
     # تنظیمات تریدینگ
     INITIAL_CAPITAL = float(os.getenv('INITIAL_CAPITAL', 50))
-    RISK_PER_TRADE = float(os.getenv('RISK_PER_TRADE', 2))
+    RISK_PER_TRADE = float(os.getenv('RISK_PER_TRADE', 2)) / 100
     LEVERAGE = int(os.getenv('LEVERAGE', 5))
     TAKE_PROFIT_PERCENT = float(os.getenv('TAKE_PROFIT_PERCENT', 2))
     STOP_LOSS_PERCENT = float(os.getenv('STOP_LOSS_PERCENT', 1))
@@ -43,6 +38,11 @@ class Config:
     # تنظیمات Logging
     LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
     UPDATE_INTERVAL = int(os.getenv('UPDATE_INTERVAL', 60))
+    
+    # Technical Indicators
+    RSI_PERIOD = 14
+    RSI_OVERBOUGHT = 70
+    RSI_OVERSOLD = 30
 
 
 class Logger:
@@ -76,7 +76,7 @@ class Logger:
 
 
 class DataManager:
-    """مدیریت داده‌ها"""
+    """مدیریت د��ده‌ها"""
     
     def __init__(self):
         self.logger = logging.getLogger('TradingBot')
